@@ -1,5 +1,20 @@
 var assert = require("assert");
-var jump = require("../jump-game-ii").jump;
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var jump = function (nums) {
+  let jumps = 0;
+  let result = nums.length - 1;
+  while (result !== 0) {
+    result = nums.findIndex((e, i) => {
+      return e + i >= result;
+    });
+    result == -1 ? 0 : result;
+    jumps++;
+  }
+  return jumps;
+};
 
 let testSet = [
   { case: [1, 2, 1, 1, 1], result: 3 },
@@ -13,9 +28,6 @@ let testSet = [
   { case: [1], result: 0 },
   { case: [2, 3, 1, 3, 1, 1, 2, 2, 3, 5, 1, 1, 1, 1, 1], result: [6] },
 ];
-
-//destination point make sense
-//jump value + start postion to consider
 
 describe("Jump game II", function () {
   testSet.forEach((e) => {
